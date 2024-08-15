@@ -20,6 +20,7 @@ clc
 % Field_Params = Init_Field_Params([], 'Non_Convac_2'  , 'No_Obstacle' , [0 0 0 0] , [0 0 0] , [15 14 0] , 0.5 , 5);
 % Field_Params = Init_Field_Params([], 'Convac_1'      , 'No_Obstacle' , [0 0 0 0] , [14 0 0] , [10 12 0] , 0.5 , 5);
 % Field_Params = Init_Field_Params([], 'Convac_2'      , 'No_Obstacle' , [0 0 0 0] , [10 1 0] , [6 10 0] , 0.5 , 5);
+%%%%%%%% base_vertices = [5 8.75; 5 27.5; 17.5 22.5; 25 31.25; 35 31.25; 30 20; 15 6.25];
 
 Blank_Field  = Init_Field_Params([], 'Blank'  , 'No_Obstacle' , [0 0 0 0] , [0 0 0] , [0 0 0] , 0 , 0);
 % Field_Params = Init_Field_Params([], 'Non_Convac_1'  , 'No_Obstacle' , 0 , [35 25 0] , [15 28 0] , 0.7 , 5);
