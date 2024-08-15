@@ -71,10 +71,8 @@ end
 % SWATH
 
 for i = 1 : Region_Count
-    [Path, Start, End]   = SWATH_Convex_Polygon(DeCo_Ply{i}.Field_Polygon, Theta);
-    DeCo_Ply{i}.Path = Path;
-    DeCo_Ply{i}.takeoff = Start;
-    DeCo_Ply{i}.landing = End;
+    [PP = SWATH_Convex_Polygon(DeCo_Ply{1}.Field_Polygon, DeCo_Ply{1}.Theta);
+    DeCo_Ply{i}.Path_Points = Path_Points;
 end
 
 % Make Next Generation

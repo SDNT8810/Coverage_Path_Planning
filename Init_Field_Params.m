@@ -77,7 +77,12 @@ function Field_Params = Init_Field_Params(Vertices, Field_Type , Obstacle_Type ,
         case 'Non_Convac_2'
             Non_Convec_Polygon_2 = [2 0;12 0;14 15;7 4;0 6;2 0];
             Field_Polygon = Non_Convec_Polygon_2;
-      
+
+        case 'Non_Convac_3'
+            Non_Convec_Polygon_3 = [5 8.75; 5 27.5; 17.5 22.5; 25 31.25; 35 31.25; 30 20; 15 6.25];
+            Field_Polygon = Non_Convec_Polygon_3;
+
+            
         otherwise
             disp('Undefined or Blank Field Type')
             disp(' ')
