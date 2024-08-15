@@ -90,6 +90,23 @@ cpMin.SolverParameters.ReferenceLocation=Field_Params.geocenter;
 [wptsExh,solnExh] = plan(cpeExh,Field_Params.takeoff,Field_Params.landing);
 [wptsMin,solnMin] = plan(cpMin ,Field_Params.takeoff,Field_Params.landing);
 
+%{
+setCoveragePattern(cs,1,SweepAngle=85)
+setCoveragePattern(cs,2,SweepAngle=5)
+setCoveragePattern(cs,3,SweepAngle=5)
+setCoveragePattern(cs,4,SweepAngle=5)
+
+cp = uavCoveragePlanner(cs,Solver="MinTraversal");
+
+[wp,soln] = plan(cp,Field_Params.landing,Field_Params.takeoff);
+legend("","","Path","Takeoff/Landing")
+show(cp.CoverageSpace);
+PolygonPlotTakeoffLandingLegend(length(cs.Polygons),Field_Params.takeoff,Field_Params.landing,wp)
+%}
+
+
+
+
 % 
 % cpeExh = uavCoveragePlanner(cs,Solver="Exhaustive");
 % cpMin = uavCoveragePlanner(cs,Solver="MinTraversal");
