@@ -45,19 +45,19 @@ function Field_Params = Init_Field_Params(Vertices, Field_Type , Obstacle_Type ,
             Field_Polygon = Vertices;
 
         case 'triangle'
-            triangle_vertices = [0 0; 1 8; 7 0];
+            triangle_vertices = 3*[0 0; 1 8; 7 0];
             Field_Polygon = triangle_vertices;
     
         case 'quadrilateral'
-            quadrilateral_vertices = [0 0; 1 3; 3 3; 4 0];
+            quadrilateral_vertices = 10*[0 0; 1 3; 3 3; 4 0];
             Field_Polygon = quadrilateral_vertices;
             
         case 'pentagonal'
-            pentagonal_vertices = [0 0; 1 4; 3 5; 4 3; 2 0];
+            pentagonal_vertices = 10*[0 0; 1 4; 3 5; 4 3; 2 0];
             Field_Polygon = pentagonal_vertices;
             
         case 'hexagonal'
-            hexagonal_vertices = [0 0; 4 6; 8 10; 12 8; 10 2; 6 0];
+            hexagonal_vertices = 5*[0 0; 4 6; 8 10; 12 8; 10 2; 6 0];
             Field_Polygon = hexagonal_vertices;
 
         case 'Convac_1'
@@ -75,7 +75,7 @@ function Field_Params = Init_Field_Params(Vertices, Field_Type , Obstacle_Type ,
             Field_Polygon = Non_Convec_Polygon_1;
             
         case 'Non_Convac_2'
-            Non_Convec_Polygon_2 = [2 0;12 0;14 15;7 4;0 6;2 0];
+            Non_Convec_Polygon_2 = 5*[2 0;12 0;14 15;7 4;0 6;2 0];
             Field_Polygon = Non_Convec_Polygon_2;
 
         case 'Non_Convac_3'

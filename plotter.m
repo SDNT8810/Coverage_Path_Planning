@@ -1,6 +1,14 @@
 function done = plotter(Field_Params,type)
 
     Obstacle_Unit = 0.5 * [-1 -1;-1 1;1 1;1 -1];
+    Obstacle_Unit = 0.5 * [  1          0;
+                                        0.7071     0.7071;
+                                        0          1;
+                                        -0.7071    0.7071;
+                                        -1         0;
+                                        -0.7071   -0.7071;
+                                        0         -1;
+                                        0.7071    -0.707];
     Obstacle_Polygon = Obstacle_Unit * Field_Params.Obstacle(3) + Field_Params.Obstacle(1:2);
     Obstacle_Vertices = Obstacle_Polygon;
     uniqueVertices = unique(Field_Params.Field_Polygon, 'rows', 'stable');
