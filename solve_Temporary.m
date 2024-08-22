@@ -1,8 +1,8 @@
 cs = uavCoverageSpace(Polygons=Seprated_Polygans);
 cpeExh = uavCoveragePlanner(cs,Solver="Exhaustive");
 cpMin = uavCoveragePlanner(cs,Solver="MinTraversal");
-%cpMin.SolverParameters.VisitingSequence =  [3 1 2 4];
-%cpMin.SolverParameters.VisitingSequence =  [4 2 1 3];
+%cpMin.SolverParameters.VisitingSequence =  [2 3 1];
+%cpeExh.SolverParameters.VisitingSequence =  [2 3 1];
 cpMin.SolverParameters.UnitWidth=Field_Params.coverageWidth;
 cpMin.SolverParameters.ReferenceHeight=Field_Params.uavElevation;
 cpMin.SolverParameters.ReferenceLocation=Field_Params.geocenter;
@@ -74,5 +74,22 @@ PolygonPlotTakeoffLandingLegend(length(cs.Polygons),Field_Params.takeoff,Field_P
 
 axis equal
 
+optimized_path_lengh = 0;
+for i = 2 : length(wptsExh)
+    optimized_path_lengh = optimized_path_lengh + norm(wptsExh(i,1:2)-wptsExh(i-1,1:2));
+end
+optimized_path_lengh
 
+
+optimized_path_lengh = 0;
+for i = 2 : length(wptsMin)
+    optimized_path_lengh = optimized_path_lengh + norm(wptsMin(i,1:2)-wptsMin(i-1,1:2));
+end
+optimized_path_lengh
+
+optimized_path_lengh = 0;
+for i = 2 : length(waypoints)
+    optimized_path_lengh = optimized_path_lengh + norm(waypoints(i,1:2)-waypoints(i-1,1:2));
+end
+optimized_path_lengh
 

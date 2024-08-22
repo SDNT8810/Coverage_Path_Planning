@@ -1,6 +1,6 @@
 % close all
-clf
-clear
+%clf
+%clear
 clc
 
 %% Define Field
@@ -24,8 +24,8 @@ clc
 % Field_Params = Init_Field_Params([], 'Convac_2'      , 'No_Obstacle' , [0 0 0 0] , [10 1 0] , [6 10 0] , 0.5 , 5);
 
 Blank_Field  = Init_Field_Params([], 'Blank'  , 'P_Obstacle' , [0 0 0 1] , [0 0 0] , [0 0 0] , 0 , 0);
- Field_Params = Init_Field_Params([], 'Non_Convac_1'  , 'No_Obstacle' , [0 0 0 0] , [35 25 0] , [15 28 0] , 0.7 , 5);
-% Field_Params = Init_Field_Params([], 'Non_Convac_1' , 'N_Obstacle' , [0 0 0 0] , [9 10 0] , [8 0 0] , 1 , 5);
+% Field_Params = Init_Field_Params([], 'Non_Convac_1'  , 'No_Obstacle' , 0 , [35 25 0] , [15 28 0] , 0.7 , 5);
+ Field_Params = Init_Field_Params([], 'Non_Convac_1' , 'N_Obstacle' , [0 0 0 0] , [20 30 0] , [20 30 0] , 1.5 , 5);
 % Field_Params = Init_Field_Params([], 'Non_Convac_3'  , 'P_Obstacle' , [20 18 5 2] , [0 0 0] , [15 14 0] , 0.5 , 5);
 %Field_Params = Init_Field_Params([], 'Non_Convac_2'  , 'No_Obstacle' , [16 16 0.5 2] , [30 15 0] , [17 3 0] , 2 , 5);
 %Field_Params = Init_Field_Params([], 'Non_Convac_2'  , 'No_Obstacle' , [16 16 0.5 0] , [30 30 0] , [1 -1 0] , 3 , 5);
