@@ -13,7 +13,7 @@ clc
 % Vertices = [0 0; 4 6; 8 10; 12 8; 10 2; 6 0; 0 0];
 % Field_Params = Init_Field_Params(Vertices, 'custom'  , 'No_Obstacle' , [0 0 0 0] , [-1 -1 0] , [3 8 0] , 0.5 , 5);
 % Field_Params = Init_Field_Params([], 'triangle'      , 'No_Obstacle' , [0 0 0 0], [-1 -1 0] , [0 23 0] , 3 , 5);
- Field_Params = Init_Field_Params([], 'quadrilateral' , 'No_Obstacle' , [0 0 0 0] , [0 5 0] , [5 30 0] , 5 , 5);
+% Field_Params = Init_Field_Params([], 'quadrilateral' , 'No_Obstacle' , [0 0 0 0] , [0 5 0] , [5 30 0] , 5 , 5);
 % Field_Params = Init_Field_Params([], 'pentagonal'    , 'No_Obstacle' , [0 0 0 0] , [4 2 0] , [0 4 0] , 0.2 , 5);
 % Field_Params = Init_Field_Params([], 'hexagonal'     , 'No_Obstacle' , [0 0 0 0] , [12 2 0] , [6 10 0] , 0.5 , 5);
 % Field_Params = Init_Field_Params([], 'Non_Convac_1'  , 'No_Obstacle' , [0 0 0 0] , [35 25 0] , [15 28 0] , 0.7 , 5);
@@ -25,7 +25,7 @@ clc
 Blank_Field  = Init_Field_Params([], 'Blank'  , 'No_Obstacle' , [0 0 0 0] , [0 0 0] , [0 0 0] , 0 , 0);
 %Field_Params = Init_Field_Params([], 'Non_Convac_3'  , 'Po_Obstacle' , [20 15 1 2] , [30 15 0] , [5 7 0] , 1 , 5);
 %Field_Params = Init_Field_Params([], 'hexagonal' , 'P_Obstacle' , [7.5 5 0.5 1] , [9 10 0] , [8 0 0] , 0.3 , 5);
-%Field_Params = Init_Field_Params([], 'Non_Convac_2'  , 'No_Obstacle' , [16 16 2 1] , [15 14 0] , [1 -1 0] , 2 , 5);
+Field_Params = Init_Field_Params([], 'Non_Convac_2'  , 'No_Obstacle' , [16 16 2 1] , [15 14 0] , [1 -1 0] , 2 , 5);
 
 % Show Field And Obstacle
 %figure(1);

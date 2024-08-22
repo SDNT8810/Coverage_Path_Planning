@@ -24,23 +24,29 @@ clc
 % Field_Params = Init_Field_Params([], 'Convac_2'      , 'No_Obstacle' , [0 0 0 0] , [10 1 0] , [6 10 0] , 0.5 , 5);
 
 Blank_Field  = Init_Field_Params([], 'Blank'  , 'P_Obstacle' , [0 0 0 1] , [0 0 0] , [0 0 0] , 0 , 0);
-% Field_Params = Init_Field_Params([], 'Non_Convac_1'  , 'No_Obstacle' , 0 , [35 25 0] , [15 28 0] , 0.7 , 5);
-%Field_Params = Init_Field_Params([], 'Non_Convac_1' , 'P_Obstacle' , [8.5 6 1 1] , [9 10 0] , [8 0 0] , 1 , 5);
+ Field_Params = Init_Field_Params([], 'Non_Convac_1'  , 'No_Obstacle' , [0 0 0 0] , [35 25 0] , [15 28 0] , 0.7 , 5);
+% Field_Params = Init_Field_Params([], 'Non_Convac_1' , 'N_Obstacle' , [0 0 0 0] , [9 10 0] , [8 0 0] , 1 , 5);
 % Field_Params = Init_Field_Params([], 'Non_Convac_3'  , 'P_Obstacle' , [20 18 5 2] , [0 0 0] , [15 14 0] , 0.5 , 5);
 %Field_Params = Init_Field_Params([], 'Non_Convac_2'  , 'No_Obstacle' , [16 16 0.5 2] , [30 15 0] , [17 3 0] , 2 , 5);
-%Field_Params = Init_Field_Params([], 'Non_Convac_2'  , 'No_Obstacle' , [35 11 3 1] , [30 30 0] , [1 -1 0] , 3 , 5);
-%Field_Params = Init_Field_Params([], 'Convac_2'      , 'R_Obstacle' , [7 5 1 2] , [14 0 0] , [10 12 0] , 0.5 , 5);
+%Field_Params = Init_Field_Params([], 'Non_Convac_2'  , 'No_Obstacle' , [16 16 0.5 0] , [30 30 0] , [1 -1 0] , 3 , 5);
+%Field_Params = Init_Field_Params([], 'Convac_2'      , 'N_Obstacle' , [0 0 0 0] , [14 0 0] , [10 12 0] , 0.5 , 5);
 %Field_Params = Init_Field_Params([], 'triangle'      , 'P_Obstacle' , [5 5 1 1] , [-1 -1 0] , [0 23 0] , 3 , 5);
 %Field_Params = Init_Field_Params([], 'quadrilateral' , 'No_Obstacle' , [0 0 0 0] , [3.5 -0.5 0] , [2.5 3.5 0] , 5 , 5);
 %Field_Params = Init_Field_Params([], 'quadrilateral' , 'P_Obstacle' , [20 15 5 2] , [0 5 0] , [5 30 0] , 5 , 5);
 %Field_Params = Init_Field_Params([], 'pentagonal'    , 'C_Obstacle' , [17 26 3.5 2] , [19 48 0] , [-2 6 0] , 0.2 , 5);
 %Field_Params = Init_Field_Params([], 'hexagonal'     , 'C_Obstacle' , [35 15 5 1] , [55 10 0] , [45 5 0] , 5 , 5);
-Field_Params = Init_Field_Params([], 'hexagonal'     , 'P_Obstacle' , [35 25 5 2] , [55 10 0] , [15 30 0] , 5 , 5);
+%Field_Params = Init_Field_Params([], 'hexagonal'     , 'P_Obstacle' , [35 25 5 2] , [55 10 0] , [15 30 0] , 5 , 5);
 
 
 % Show Field And Obstacle
 figure(1);
-Done = plotter(Field_Params,'V');
+
+if (Field_Params.Obstacle(4) > 0)
+    Done = plotter(Field_Params,'V');
+else
+    plotttt = Field_Params;
+    Done = plotter(plotttt,'T');
+end
 axis equal
 
 % cut main polygon into small convex polygons (Decomposition)
@@ -53,29 +59,42 @@ Region_Count = length(polygons);
 DeCo_Ply{Region_Count} = [];
 Seprated_Polygans{Region_Count} = [];
 Order = randperm(Region_Count);
-for i = 1 : Region_Count
-    [Area, GeoCenter] = Area_Geo_Center(polygons{i}.Vertices);
-    DeCo_Ply{i} = Blank_Field;
-    DeCo_Ply{i}.Field_Polygon = polygons{i};
-    DeCo_Ply{i}.Theta = 0;
-    DeCo_Ply{i}.Order = Order(i);
-    DeCo_Ply{i}.Area = Area;
-    DeCo_Ply{i}.geocenter = GeoCenter;
-
-    %{
-    if (i == 1)
-        DeCo_Ply{i}.takeoff = Field_Params.takeoff;
-    elseif (i == Region_Count )
-        DeCo_Ply{i}.takeoff = DeCo_Ply{i-1}.landing;
-        DeCo_Ply{i}.landing = Field_Params.landing;
-        
+if (Region_Count>1)
+    if (Field_Params.Obstacle(4)>0)
+        for i = 1 : Region_Count
+            [Area, GeoCenter] = Area_Geo_Center(polygons{i}.Vertices);
+            DeCo_Ply{i} = Blank_Field;
+            DeCo_Ply{i}.Field_Polygon = polygons{i};
+            DeCo_Ply{i}.Theta = 0;
+            DeCo_Ply{i}.Order = Order(i);
+            DeCo_Ply{i}.Area = Area;
+            DeCo_Ply{i}.geocenter = GeoCenter;
+    
+            Seprated_Polygans{i} = DeCo_Ply{i}.Field_Polygon.Vertices;
+        end
     else
-        DeCo_Ply{i}.takeoff = DeCo_Ply{i-1}.landing;
-        DeCo_Ply{i}.landing = Field_Params.landing;
-    end
-    %}
+        for i = 1 : Region_Count
+            [Area, GeoCenter] = Area_Geo_Center(polygons{i});
+            DeCo_Ply{i} = Blank_Field;
+            DeCo_Ply{i}.Field_Polygon = polygons{i};
+            DeCo_Ply{i}.Theta = 0;
+            DeCo_Ply{i}.Order = Order(i);
+            DeCo_Ply{i}.Area = Area;
+            DeCo_Ply{i}.geocenter = GeoCenter;
 
-    Seprated_Polygans{i} = DeCo_Ply{i}.Field_Polygon.Vertices;
+            Seprated_Polygans{i} = DeCo_Ply{i}.Field_Polygon;
+        end
+    end
+else
+    [Area, GeoCenter] = Area_Geo_Center(polygons{1});
+    DeCo_Ply = Blank_Field;
+    DeCo_Ply.Field_Polygon = polygons;
+    DeCo_Ply.Theta = 0;
+    DeCo_Ply.Order = Order;
+    DeCo_Ply.Area = Area;
+    DeCo_Ply.geocenter = GeoCenter;
+
+    Seprated_Polygans = DeCo_Ply.Field_Polygon{1};
 end
 
 
