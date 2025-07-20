@@ -20,31 +20,51 @@
 
 ## 🚀 Quick Start
 
-### Installation
+### Option 1: Run Directly (No Installation Required)
 
 ```bash
 # Clone the repository
 git clone https://github.com/SDNT8810/field-coverage-planner.git
 cd field-coverage-planner
 
-# Install with pip
-pip install -e .
+# Install dependencies only
+pip3 install -r requirements.txt
 
-# Or install dependencies manually
-pip install -r requirements.txt
-```
-
-### Basic Usage
-
-```bash
-# Quick start with default example
-field-coverage
+# Run directly with Python
+python3 run.py
 
 # Use your own GPS field data
-field-coverage your_field.csv output_waypoints.csv
+python3 run.py your_field.csv output_waypoints.csv
 
 # With custom parameters
-field-coverage field.csv --swath-width 2.5 --overlap 0.15 --optimization-step 5
+python3 run.py field.csv --swath-width 2.5 --overlap 0.15 --optimization-step 5
+```
+
+### Option 2: Install as Package
+
+```bash
+# Install with pip (optional)
+pip install -e .
+
+# Then use the installed command
+field-coverage
+field-coverage your_field.csv output_waypoints.csv
+```
+
+### ⚡ Quick Examples
+
+```bash
+# Run with defaults (uses example field data)
+python3 run.py
+
+# Custom field with optimized settings
+python3 run.py my_field.csv my_output.csv --swath-width 3.0 --optimization-step 5
+
+# Generate plot without showing window
+python3 run.py --no-show-plot --plot-output my_plot.png
+
+# Verbose output with validation
+python3 run.py --verbose --validate
 ```
 
 ## 📋 Input Format
@@ -64,6 +84,10 @@ latitude,longitude
 ## 🛠️ Command Line Options
 
 ```bash
+# Using direct runner script
+python3 run.py [input_file] [output_file] [options]
+
+# Or if installed as package
 field-coverage [input_file] [output_file] [options]
 
 Positional Arguments:
@@ -159,10 +183,13 @@ field-coverage-planner/
 
 ```bash
 # Run basic tests
-python -m pytest tests/
+python3 -m pytest tests/
 
-# Test with your own field data
-python test_optimization.py
+# Test optimization algorithm specifically
+python3 tests/test_optimization.py
+
+# Run from any directory
+cd tests && python3 test_optimization.py
 ```
 
 ### Contributing

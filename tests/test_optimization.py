@@ -3,8 +3,16 @@
 Test script to verify the optimization algorithm works correctly.
 """
 
-from src.field_coverage import Field, BoustrophedonPlanner
-from src.field_coverage.io.csv_handler import CSVHandler
+import sys
+from pathlib import Path
+
+# Add src directory to Python path
+project_root = Path(__file__).parent.parent
+src_path = project_root / "src"
+sys.path.insert(0, str(src_path))
+
+from field_coverage import Field, BoustrophedonPlanner
+from field_coverage.io.csv_handler import CSVHandler
 
 def test_optimization():
     print("🔍 Testing coverage optimization on 7-edge polygon...")
@@ -14,7 +22,7 @@ def test_optimization():
     boundary_points = handler.read_field_boundary_csv("data/example_field.csv")
     
     # Create field boundary
-    from src.field_coverage.core.field import FieldBoundary
+    from field_coverage.core.field import FieldBoundary
     boundary = FieldBoundary(boundary_points)
     field = Field(boundary, field_id="test_heptagon")
     
