@@ -222,7 +222,7 @@ class FieldPlotter:
     def plot_complete_coverage(self, field: Field, waypoints: WaypointSequence,
                              swath_width: float, total_distance: float,
                              estimated_time: float, title: str = None,
-                             save_path: str = None) -> None:
+                             save_path: str = None, show: bool = True) -> None:
         """
         Create a complete coverage visualization.
         
@@ -234,6 +234,7 @@ class FieldPlotter:
             estimated_time: Estimated time in minutes
             title: Plot title
             save_path: Path to save the plot
+            show: Whether to display the plot
         """
         # Setup plot
         if title is None:
@@ -256,8 +257,9 @@ class FieldPlotter:
         if save_path:
             self.save_plot(save_path)
         
-        # Show plot
-        self.show()
+        # Show plot only if requested
+        if show:
+            self.show()
 
 
 def create_coverage_visualization(field: Field, waypoints: WaypointSequence,
@@ -290,7 +292,8 @@ def create_coverage_visualization(field: Field, waypoints: WaypointSequence,
             total_distance=total_distance,
             estimated_time=estimated_time,
             title=title,
-            save_path=output_path
+            save_path=output_path,
+            show=show
         )
         
         if not show:

@@ -166,6 +166,9 @@ output/*.png
 output/*.jpg
 output/*.jpeg
 !data/example_field.csv
+!docs/images/*.png
+!docs/images/*.jpg
+!docs/images/*.jpeg
 
 # Temporary files
 temp/

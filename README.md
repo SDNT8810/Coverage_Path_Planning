@@ -1,194 +1,218 @@
-# Field Coverage Path Planner
+# 🚁 Field Coverage Planner
 
-A Python library for generating optimal coverage paths for agricultural fields using GPS coordinates with intelligent direction optimization and real-time optimization feedback.
+[![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
+[![Python 3.8+](https://img.shields.io/badge/python-3.8+-blue.svg)](https://www.python.org/downloads/)
 
-## ✨ Features
+**Advanced agricultural field coverage path planning system with intelligent optimization**
 
-- **🎯 Multiple Input Sources**: Support for CSV files and ROS topics
-- **🗺️ Polygon Field Processing**: Handle any valid polygon shape including complex geometries  
-- **🧠 Intelligent Path Optimization**: Automatically finds optimal coverage direction to minimize travel distance
-- **⚙️ Configurable Optimization**: Adjustable step size for precision vs speed trade-offs (1° to 30° steps)
-- **📍 GPS Coordinate Handling**: Accurate coordinate transformations with UTM projection
-- **🔄 Boustrophedon Coverage**: Back-and-forth pattern with proper field boundary intersection using Shapely
-- **📊 Visualization**: Plot field boundaries and coverage paths with matplotlib
-- **🎛️ Configurable Parameters**: Swath width, overlap, turn radius, optimization precision
-- **⭐ Real-time Optimization Display**: See optimization progress with visual feedback markers
+![Field Coverage Example](docs/images/example_coverage.png)
 
-## 🚀 Performance Optimization Results
+## 🎯 Features
 
-The optimization algorithm can significantly reduce travel distance:
+- **🤖 Intelligent Direction Optimization**: Automatically finds the optimal coverage direction to minimize path length
+- **⭐ Visual Feedback**: Star emoji marking shows optimal directions during optimization
+- **🚀 User-Friendly CLI**: Run with default parameters or customize everything
+- **📊 Complex Field Support**: Handles any polygon shape (tested with 7+ edge fields)
+- **🔍 Configurable Precision**: Adjustable optimization step sizes (1° to 30°)
+- **📈 Real-time Visualization**: Generates plots and statistics automatically
+- **✅ Comprehensive Validation**: Built-in waypoint and field validation
+- **🔧 Easy Installation**: Simple pip install with all dependencies
 
-| Optimization Level | Step Size | Directions Tested | Typical Improvement |
-|-------------------|-----------|-------------------|-------------------|
-| **Quick** | 30° | 6 | 0.5-1% path reduction |
-| **Standard** | 15° | 12 | 1-2% path reduction |
-| **Fine** | 5° | 36 | 1.5-2.5% path reduction |
-| **Precision** | 1° | 180 | 2-3% path reduction |
+## 🚀 Quick Start
 
-*Example: 7-edge field optimization found 95.7m (1.15%) improvement from worst to best direction*
-
-## Installation
+### Installation
 
 ```bash
 # Clone the repository
-git clone <repository-url>
+git clone https://github.com/SDNT8810/field-coverage-planner.git
 cd field-coverage-planner
 
-# Create virtual environment
-python -m venv venv
-source venv/bin/activate  # On Windows: venv\Scripts\activate
+# Install with pip
+pip install -e .
 
-# Install dependencies
+# Or install dependencies manually
 pip install -r requirements.txt
 ```
 
-## Quick Start
+### Basic Usage
 
-### Command Line Interface
 ```bash
-# Basic coverage with automatic optimization
-field-coverage field_boundary.csv waypoints.csv
+# Quick start with default example
+field-coverage
 
-# Specify coverage direction manually
-field-coverage field_boundary.csv waypoints.csv --direction 45
+# Use your own GPS field data
+field-coverage your_field.csv output_waypoints.csv
 
-# Fine optimization (slower but more precise)
-field-coverage field_boundary.csv waypoints.csv --optimization-step 1
-
-# Quick optimization (faster)
-field-coverage field_boundary.csv waypoints.csv --optimization-step 30
-
-# With visualization
-field-coverage field_boundary.csv waypoints.csv --plot --plot-output field_plot.png
-
-# All parameters
-field-coverage field_boundary.csv waypoints.csv \
-  --swath-width 4.0 \
-  --overlap 0.15 \
-  --direction 90 \
-  --plot \
-  --verbose
+# With custom parameters
+field-coverage field.csv --swath-width 2.5 --overlap 0.15 --optimization-step 5
 ```
 
-### Python API
-```python
-from field_coverage import FieldCoveragePlanner
+## 📋 Input Format
 
-# Initialize planner
-planner = FieldCoveragePlanner(swath_width=2.0, overlap=0.1)
+Your CSV file should contain GPS coordinates with `latitude,longitude` columns:
 
-# Load field from CSV
-field = planner.load_field_from_csv('field_boundary.csv')
-
-# Generate coverage path with automatic optimization
-waypoints = planner.generate_coverage_path(field, optimization_step=5.0)
-
-# Generate coverage path with specific direction
-waypoints = planner.generate_coverage_path(field, direction=45.0)
-
-# Export waypoints
-planner.export_waypoints(waypoints, 'waypoints.csv')
-```
-
-### From ROS Topic
-```python
-from field_coverage import ROSFieldPlanner
-
-# Initialize ROS planner
-ros_planner = ROSFieldPlanner('/field_boundary', swath_width=2.0)
-
-# Start listening for field boundaries
-ros_planner.start_coverage_service()
-```
-
-## Input Format
-
-### CSV File Format
 ```csv
 latitude,longitude
 40.7128,-74.0060
-40.7580,-73.9855
-40.7489,-73.9441
+40.7158,-74.0060
+40.7168,-74.0040
+40.7148,-74.0030
+40.7138,-74.0040
 40.7128,-74.0060
 ```
 
-## Output Format
+## 🛠️ Command Line Options
 
-### Waypoints CSV
-```csv
-waypoint_id,latitude,longitude,heading,speed,waypoint_type
-1,40.7128,-74.0060,90.0,2.0,coverage
-2,40.7130,-74.0058,90.0,2.0,coverage
-3,40.7132,-74.0056,270.0,1.0,turn
-4,40.7134,-74.0054,270.0,2.0,coverage
-...
+```bash
+field-coverage [input_file] [output_file] [options]
+
+Positional Arguments:
+  input_file            GPS coordinates CSV file (default: data/example_field.csv)
+  output_file           Output waypoints CSV file (default: output/coverage_result.csv)
+
+Coverage Parameters:
+  --swath-width FLOAT   Swath width in meters (default: 3.0)
+  --overlap FLOAT       Overlap percentage as decimal (default: 0.1)
+  --turn-radius FLOAT   Minimum turning radius in meters (default: 2.0)
+  --speed FLOAT         Default waypoint speed in m/s (default: 2.0)
+
+Optimization:
+  --direction FLOAT     Fixed coverage direction in degrees (0=North, 90=East)
+  --optimization-step   Step size for optimization in degrees (default: 15.0)
+                       Smaller values = more precise but slower
+
+Output Options:
+  --plot               Generate visualization plot (default: True)
+  --plot-output PATH   Plot output path (default: output/field_coverage_plot.png)
+  --no-show-plot       Don't display plot window (default)
+  --validate           Validate waypoints (default: True)
+  --verbose            Enable verbose output (default: True)
 ```
 
-### Coverage Report
-```csv
-metric,value,unit
-total_waypoints,834,count
-total_distance,8312.5,meters
-coverage_area,29002.6,square_meters
-estimated_time,69.3,minutes
-optimal_direction,60.0,degrees
-swath_width,4.0,meters
+## 📊 Example Results
+
+The system automatically optimizes coverage direction and provides detailed statistics:
+
+```
+🔍 Optimizing coverage direction...
+  Testing 12 directions (step: 15.0°)...
+    Direction    0.0°:  11056.9m total path
+    Direction   15.0°:  11039.9m total path
+    Direction   30.0°:  11038.0m total path
+    Direction   45.0°:  10989.0m total path ⭐
+    Direction   60.0°:  11032.7m total path
+    Direction   75.0°:  11055.4m total path
+    Direction   90.0°:  11054.0m total path
+    Direction  105.0°:  11012.3m total path
+    Direction  120.0°:  11050.5m total path
+    Direction  135.0°:  11039.3m total path
+    Direction  150.0°:  11050.3m total path
+    Direction  165.0°:  11041.7m total path
+  Best direction: 45.0° with 10989.0m total path
+✓ Optimal direction found: 45.0°
+
+Field Area: 29,003 m² (2.9 hectares)
+Generated: 1,117 waypoints
+Total Distance: 10,989 m (11.0 km)
+Estimated Time: 91.6 minutes
 ```
 
-## Algorithm Features
-
-### Direction Optimization
-- **Automatic**: Tests multiple directions to find minimum path length
-- **Configurable Precision**: Adjustable step size (1° to 30°)
-- **Performance**: Up to 1.15% path length reduction vs non-optimized
-- **User Control**: Can specify exact direction or let algorithm optimize
-
-### Field Boundary Handling
-- **Shapely Integration**: Proper geometric intersection with complex polygons
-- **No Rectangular Assumption**: Respects actual field boundaries
-- **Multi-segment Support**: Handles fields with holes or irregular shapes
-
-## Project Structure
+## 🏗️ Project Structure
 
 ```
 field-coverage-planner/
-├── src/
-│   └── field_coverage/
-│       ├── __init__.py
-│       ├── main.py                    # Main FieldCoveragePlanner class
-│       ├── cli.py                     # Command line interface
-│       ├── core/
-│       │   ├── __init__.py
-│       │   ├── field.py               # Field and boundary classes
-│       │   ├── waypoint.py            # Waypoint and sequence classes
-│       │   └── coordinates.py         # GPS/UTM coordinate handling
-│       ├── algorithms/
-│       │   ├── __init__.py
-│       │   └── boustrophedon.py       # Boustrophedon coverage with optimization
-│       ├── io/
-│       │   ├── __init__.py
-│       │   ├── csv_handler.py         # CSV input/output
-│       │   └── ros_handler.py         # ROS topic support
-│       ├── utils/
-│       │   ├── __init__.py
-│       │   ├── geometry.py            # Geometric utilities
-│       │   └── validation.py          # Waypoint validation
-│       └── visualization/
-│           ├── __init__.py
-│           └── field_plotter.py       # Matplotlib visualization
-├── tests/                             # Unit and integration tests
-├── examples/                          # Example usage scripts
-├── data/                              # Sample field data
-│   ├── simple_rectangle.csv
-│   └── example_field.csv
-├── docs/                              # Documentation
-├── requirements.txt                   # Python dependencies
-├── setup.py                          # Package setup
-├── README.md                          # This file
-├── TODO.md                           # Project status and todos
-└── PROJECT_STATUS.md                 # Implementation summary
+├── src/field_coverage/          # Main package
+│   ├── algorithms/              # Coverage algorithms
+│   │   └── boustrophedon.py    # Boustrophedon pattern generator
+│   ├── core/                   # Core classes
+│   │   ├── field.py           # Field representation
+│   │   ├── waypoint.py        # Waypoint sequences
+│   │   └── coordinates.py     # GPS coordinate handling
+│   ├── utils/                  # Utilities
+│   │   ├── geometry.py        # Geometric calculations
+│   │   └── validation.py      # Data validation
+│   ├── visualization/          # Plotting and visualization
+│   │   └── field_plotter.py   # Matplotlib-based plotting
+│   ├── io/                     # Input/output handling
+│   │   ├── csv_handler.py     # CSV file operations
+│   │   └── ros_handler.py     # ROS integration (future)
+│   ├── cli.py                  # Command line interface
+│   └── main.py                 # Main planner class
+├── data/                       # Example datasets
+│   └── example_field.csv      # 7-edge polygon example
+├── docs/                       # Documentation
+│   ├── images/                # Documentation images
+│   ├── IMPLEMENTATION_SUMMARY.md
+│   ├── PROJECT_STATUS.md
+│   └── TODO.md
+├── examples/                   # Usage examples
+├── tests/                      # Unit tests
+├── requirements.txt            # Python dependencies
+├── setup.py                   # Package setup
+├── LICENSE                    # MIT License
+└── README.md                  # This file
 ```
 
-## License
+## 🧪 Development
 
-MIT License
+### Running Tests
+
+```bash
+# Run basic tests
+python -m pytest tests/
+
+# Test with your own field data
+python test_optimization.py
+```
+
+### Contributing
+
+1. Fork the repository
+2. Create a feature branch: `git checkout -b feature-name`
+3. Make your changes and add tests
+4. Commit your changes: `git commit -am 'Add feature'`
+5. Push to the branch: `git push origin feature-name`
+6. Submit a pull request
+
+## 📚 Algorithm Details
+
+### Boustrophedon Pattern
+- Generates parallel coverage paths with U-turns at field boundaries
+- Intelligent direction optimization minimizes total path length
+- Handles complex polygon shapes with obstacle avoidance
+- Configurable overlap and swath width for different applications
+
+### Optimization Process
+1. **Direction Testing**: Tests multiple directions (configurable step size)
+2. **Path Generation**: Creates boustrophedon pattern for each direction
+3. **Distance Calculation**: Measures total path length including turns
+4. **Best Selection**: Chooses direction with minimum total distance
+5. **Visual Feedback**: Marks optimal direction with star emoji ⭐
+
+## 🔧 Requirements
+
+- Python 3.8+
+- NumPy
+- Matplotlib
+- Shapely
+- Click (for CLI)
+
+## 📄 License
+
+This project is licensed under the MIT License - see the [LICENSE](LICENSE) file for details.
+
+## 👨‍💻 Author
+
+**Davoud Nikkhouy** (@SDNT8810)
+- Email: davoudnikkhouy@gmail.com
+- GitHub: [SDNT8810](https://github.com/SDNT8810)
+
+## 🙏 Acknowledgments
+
+- Built for agricultural automation and precision farming applications
+- Supports UAV/drone path planning workflows
+- Compatible with various field management systems
+
+---
+
+⭐ **If this project helps you, please give it a star!** ⭐
