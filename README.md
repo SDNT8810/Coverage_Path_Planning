@@ -145,33 +145,36 @@ Estimated Time: 91.6 minutes
 
 ```
 field-coverage-planner/
-├── src/field_coverage/          # Main package
-│   ├── algorithms/              # Coverage algorithms
-│   │   └── boustrophedon.py    # Boustrophedon pattern generator
-│   ├── core/                   # Core classes
-│   │   ├── field.py           # Field representation
-│   │   ├── waypoint.py        # Waypoint sequences
-│   │   └── coordinates.py     # GPS coordinate handling
-│   ├── utils/                  # Utilities
-│   │   ├── geometry.py        # Geometric calculations
-│   │   └── validation.py      # Data validation
-│   ├── visualization/          # Plotting and visualization
-│   │   └── field_plotter.py   # Matplotlib-based plotting
-│   ├── io/                     # Input/output handling
-│   │   ├── csv_handler.py     # CSV file operations
-│   │   └── ros_handler.py     # ROS integration (future)
-│   ├── cli.py                  # Command line interface
-│   └── main.py                 # Main planner class
-├── data/                       # Example datasets
-│   └── example_field.csv      # 7-edge polygon example
-├── docs/                       # Documentation
-│   ├── images/                # Documentation images
+├── run.py                      # 🎯 Direct runner script (no installation needed)
+├── src/field_coverage/         # Main package
+│   ├── algorithms/             # Coverage algorithms
+│   │   └── boustrophedon.py   # Boustrophedon pattern generator
+│   ├── core/                  # Core classes
+│   │   ├── field.py          # Field representation
+│   │   ├── waypoint.py       # Waypoint sequences
+│   │   └── coordinates.py    # GPS coordinate handling
+│   ├── utils/                 # Utilities
+│   │   ├── geometry.py       # Geometric calculations
+│   │   └── validation.py     # Data validation
+│   ├── visualization/         # Plotting and visualization
+│   │   └── field_plotter.py  # Matplotlib-based plotting
+│   ├── io/                    # Input/output handling
+│   │   ├── csv_handler.py    # CSV file operations
+│   │   └── ros_handler.py    # ROS integration (future)
+│   ├── cli.py                 # Command line interface
+│   └── main.py                # Main planner class
+├── data/                      # Example datasets
+│   └── example_field.csv     # 7-edge polygon example
+├── docs/                      # Documentation
+│   ├── images/               # Documentation images
 │   ├── IMPLEMENTATION_SUMMARY.md
 │   ├── PROJECT_STATUS.md
 │   └── TODO.md
-├── examples/                   # Usage examples
-├── tests/                      # Unit tests
-├── requirements.txt            # Python dependencies
+├── examples/                  # Usage examples
+├── tests/                     # Unit tests
+│   ├── test_basic.py         # Basic functionality tests
+│   └── test_optimization.py  # Optimization algorithm tests
+├── requirements.txt           # Python dependencies
 ├── setup.py                   # Package setup
 ├── LICENSE                    # MIT License
 └── README.md                  # This file
