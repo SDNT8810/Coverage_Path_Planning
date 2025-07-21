@@ -305,6 +305,8 @@ field-coverage-planner/
 │   └── example_field.csv     # 7-edge polygon example
 ├── docs/                      # Documentation
 │   ├── images/               # Documentation images
+│   ├── CHANGELOG.md          # Project changelog
+│   ├── CROSS_PLATFORM_COMPATIBILITY.md
 │   ├── IMPLEMENTATION_SUMMARY.md
 │   ├── PROJECT_STATUS.md
 │   └── TODO.md
@@ -365,7 +367,15 @@ cd tests && python3 test_optimization.py
 - Shapely
 - Click (for CLI)
 
-## 📄 License
+## � Documentation
+
+- **[CHANGELOG.md](docs/CHANGELOG.md)** - Version history and release notes
+- **[IMPLEMENTATION_SUMMARY.md](docs/IMPLEMENTATION_SUMMARY.md)** - Technical implementation details
+- **[CROSS_PLATFORM_COMPATIBILITY.md](docs/CROSS_PLATFORM_COMPATIBILITY.md)** - Platform-specific information
+- **[PROJECT_STATUS.md](docs/PROJECT_STATUS.md)** - Current project status
+- **[TODO.md](docs/TODO.md)** - Future development plans
+
+## �📄 License
 
 This project is licensed under the MIT License - see the [LICENSE](LICENSE) file for details.
 
