@@ -1,0 +1,33 @@
+# Field Coverage Planner - Default Configuration
+# This file contains default values for all parameters
+# Priority: 1) Command line arguments 2) This YAML file 3) Hardcoded defaults
+
+# Input/Output Settings
+input_file: "data/example_field.csv"
+output_file: "output/coverage_result.csv"
+
+# Coverage Parameters
+swath_width: 2.5          # Swath width in meters (changed from hardcoded 3.0)
+overlap: 0.15             # Overlap percentage as decimal (changed from hardcoded 0.1)
+turn_radius: 1.5          # Minimum turning radius in meters (changed from hardcoded 2.0)
+speed: 1.5                # Default waypoint speed in m/s (changed from hardcoded 2.0)
+
+# Direction and Optimization
+direction: null           # Coverage direction in degrees (null = auto-optimize)
+optimization_step: 30.0   # Step size for optimization in degrees (changed from hardcoded 15.0)
+
+# Field Settings
+field_id: null            # Field identifier (null = use input filename)
+algorithm: "boustrophedon" # Coverage algorithm to use
+
+# Output Options
+report: false             # Generate detailed coverage report
+plot: true                # Generate visualization plot
+plot_output: "output/field_coverage_plot.png"  # Plot output path
+show_plot: false          # Display plot window
+validate: true            # Validate waypoints after generation
+verbose: true             # Enable verbose output
+
+# Advanced Settings (for future use)
+sampling_distance: 10.0   # Waypoint sampling distance in meters
+max_turn_angle: 90.0      # Maximum turn angle in degrees

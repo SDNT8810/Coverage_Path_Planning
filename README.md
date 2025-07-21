@@ -1,6 +1,29 @@
 # 🚁 Field Coverage Planner
 
-[![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
+[![License: M### Option 2: Install as Package
+
+```bash
+# Install with pip (optional)
+pip3 install -e .
+
+# Then use the installed command
+field-coverage
+field-coverage your_field.csv output_waypoints.csv
+```
+
+### 🔄 Keeping Up to Date
+
+When you make changes to the code, you need to update the system installation:
+
+```bash
+# Option 1: Use the update script (recommended)
+./update.sh
+
+# Option 2: Manual reinstallation
+pip3 uninstall field-coverage-planner -y && pip3 install -e .
+```
+
+**Why update?** The `field-coverage` system command needs to be synced with code changes, while `python3 run.py` always uses the latest code directly.//img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
 [![Python 3.8+](https://img.shields.io/badge/python-3.8+-blue.svg)](https://www.python.org/downloads/)
 
 **Advanced agricultural field coverage path planning system with intelligent optimization**
@@ -65,6 +88,40 @@ python3 run.py --no-show-plot --plot-output my_plot.png
 
 # Verbose output with validation
 python3 run.py --verbose --validate
+```
+
+## ⚙️ Configuration System
+
+The system uses a **3-level priority system**:
+
+1. **Command Line Arguments** (highest priority)
+2. **YAML Configuration File** (`config/defaults.yaml`)  
+3. **Hardcoded Defaults** (lowest priority)
+
+### Configuration File
+
+Edit `config/defaults.yaml` to set your preferred defaults:
+
+```yaml
+# Coverage Parameters
+swath_width: 3.0          # Swath width in meters
+overlap: 0.1              # Overlap percentage (0.1 = 10%)
+turn_radius: 2.0          # Minimum turning radius in meters  
+speed: 2.0                # Default waypoint speed in m/s
+optimization_step: 15.0   # Step size for optimization in degrees
+
+# Input/Output (paths relative to project root)
+input_file: "data/example_field.csv"
+output_file: "output/coverage_result.csv"
+plot_output: "output/field_coverage_plot.png"
+```
+
+The system automatically finds the project root and works from any directory:
+
+```bash
+# Works from anywhere!
+cd /tmp
+python3 /path/to/Coverage_Path_Planning/run.py --verbose
 ```
 
 ## 📋 Input Format

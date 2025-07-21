@@ -5,6 +5,7 @@ pyproj>=3.2.0              # GPS coordinate transformations (UTM projection)
 pandas>=1.3.0              # CSV data handling and processing
 matplotlib>=3.5.0          # Visualization and plotting
 geopandas>=0.10.0          # Advanced GIS operations
+PyYAML>=6.0                # YAML configuration file support
 
 # Optional ROS dependencies
 # rclpy>=3.0.0             # Uncomment for ROS2 support
