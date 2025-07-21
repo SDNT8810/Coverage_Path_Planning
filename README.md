@@ -2,6 +2,7 @@
 
 [![License: M### Option 2: Install as Package
 
+#### **🍎 macOS / 🐧 Linux**
 ```bash
 # Install with pip (optional)
 pip3 install -e .
@@ -11,10 +12,21 @@ field-coverage
 field-coverage your_field.csv output_waypoints.csv
 ```
 
+#### **🪟 Windows**
+```cmd
+REM Install with pip (optional)
+pip install -e .
+
+REM Then use the installed command
+field-coverage
+field-coverage your_field.csv output_waypoints.csv
+```
+
 ### 🔄 Keeping Up to Date
 
 When you make changes to the code, you need to update the system installation:
 
+#### **🍎 macOS / 🐧 Linux**
 ```bash
 # Option 1: Use the update script (recommended)
 ./update.sh
@@ -23,7 +35,16 @@ When you make changes to the code, you need to update the system installation:
 pip3 uninstall field-coverage-planner -y && pip3 install -e .
 ```
 
-**Why update?** The `field-coverage` system command needs to be synced with code changes, while `python3 run.py` always uses the latest code directly.//img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
+#### **🪟 Windows**
+```cmd
+REM Option 1: Use the update script (recommended)
+update.bat
+
+REM Option 2: Manual reinstallation
+pip uninstall field-coverage-planner -y && pip install -e .
+```
+
+**Why update?** The `field-coverage` system command needs to be synced with code changes, while direct execution always uses the latest code.//img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
 [![Python 3.8+](https://img.shields.io/badge/python-3.8+-blue.svg)](https://www.python.org/downloads/)
 
 **Advanced agricultural field coverage path planning system with intelligent optimization**
@@ -43,8 +64,10 @@ pip3 uninstall field-coverage-planner -y && pip3 install -e .
 
 ## 🚀 Quick Start
 
-### Option 1: Run Directly (No Installation Required)
+### 🌍 Cross-Platform Support
+This project works on **Windows**, **macOS**, and **Linux/Ubuntu**. Choose your platform:
 
+#### **🍎 macOS / 🐧 Linux**
 ```bash
 # Clone the repository
 git clone https://github.com/SDNT8810/field-coverage-planner.git
@@ -63,6 +86,26 @@ python3 run.py your_field.csv output_waypoints.csv
 python3 run.py field.csv --swath-width 2.5 --overlap 0.15 --optimization-step 5
 ```
 
+#### **🪟 Windows**
+```cmd
+REM Clone the repository
+git clone https://github.com/SDNT8810/field-coverage-planner.git
+cd field-coverage-planner
+
+REM Install dependencies only
+pip install -r requirements.txt
+
+REM Run directly with Python
+python run.py
+REM OR use the batch script
+run.bat
+
+REM Use your own GPS field data
+python run.py your_field.csv output_waypoints.csv
+REM OR
+run.bat your_field.csv output_waypoints.csv
+```
+
 ### Option 2: Install as Package
 
 ```bash
@@ -76,6 +119,7 @@ field-coverage your_field.csv output_waypoints.csv
 
 ### ⚡ Quick Examples
 
+#### **🍎 macOS / 🐧 Linux**
 ```bash
 # Run with defaults (uses example field data)
 python3 run.py
@@ -88,6 +132,20 @@ python3 run.py --no-show-plot --plot-output my_plot.png
 
 # Verbose output with validation
 python3 run.py --verbose --validate
+```
+
+#### **🪟 Windows**
+```cmd
+REM Run with defaults (uses example field data)
+python run.py
+REM OR
+run.bat
+
+REM Custom field with optimized settings
+python run.py my_field.csv my_output.csv --swath-width 3.0 --optimization-step 5
+
+REM Generate plot without showing window
+run.bat --no-show-plot --plot-output my_plot.png
 ```
 
 ## ⚙️ Configuration System
@@ -123,6 +181,29 @@ The system automatically finds the project root and works from any directory:
 cd /tmp
 python3 /path/to/Coverage_Path_Planning/run.py --verbose
 ```
+
+## 🔍 Platform Verification
+
+Before using the system, you can verify compatibility on your platform:
+
+#### **🍎 macOS / 🐧 Linux**
+```bash
+python3 tests/check_compatibility.py
+```
+
+#### **🪟 Windows**
+```cmd
+python tests/check_compatibility.py
+```
+
+This will check:
+- ✅ Python version compatibility (3.8+)
+- ✅ All required dependencies  
+- ✅ Project structure integrity
+- ✅ Basic functionality tests
+- ✅ Command line interface
+
+**📚 Full compatibility guide**: See `docs/CROSS_PLATFORM_COMPATIBILITY.md` for detailed platform-specific information.
 
 ## 📋 Input Format
 
